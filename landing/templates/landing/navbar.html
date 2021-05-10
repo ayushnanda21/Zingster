@@ -1,3 +1,5 @@
+{% load custom_tags %}
+
 <div class="container">
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
@@ -11,16 +13,16 @@
     href="{% url 'index' %}"
     {% endif %}
 
-    ><i class="fas fa-comment"></i> Zingster </a>
+    ><i class="fas fa-comment"></i> Social Network</a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       </ul>
       <form class="d-flex" method="GET" action="{% url 'profile-search' %}">
         <div class="input-group">
-        <span class="input-group-text" id="basic-addon1">@</span>
-        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="query" value="{{request.GET.query}}">
-        <button class="remove-default-btn"  type="submit"><i class="fas fa-search"></i></button>
-    </div>
+          <span class="input-group-text" id="basic-addon1">@</span>
+          <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="query" value="{{ request.GET.query }}">
+          <button class="remove-default-btn" type="submit"><i class="fas fa-search"></i></button>
+        </div>
       </form>
       {% if user.is_authenticated %}
       <div class="nav-item dropdown">
@@ -30,8 +32,12 @@
           <li><a class="dropdown-item" href="{% url 'account_logout' %}">Sign Out</a></li>
         </ul>
       </div>
+      <div class="nav-item">
+        {% show_notifications %}
       {% endif %}
     </div>
   </div>
+
+  
 </nav>
 </div>
