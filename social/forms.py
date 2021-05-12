@@ -1,29 +1,27 @@
 from django import forms
-from .models import Post,Comment
+from .models import Post, Comment, MessageModel
 
 class PostForm(forms.ModelForm):
-
-    body  = forms.CharField(
+    body = forms.CharField(
         label='',
-        widget = forms.Textarea(attrs ={
+        widget=forms.Textarea(attrs={
             'rows': '3',
-            'placeholder': 'Say Something .......'
-        })
-    )
+            'placeholder': 'Say Something...'
+            }))
 
-    image = forms.ImageField(required =False)
-    
+    image = forms.ImageField(required=False)
+
     class Meta:
         model = Post
-        fields = ['body','image']
+        fields = ['body', 'image']
 
 class CommentForm(forms.ModelForm):
     comment = forms.CharField(
         label='',
-        widget=forms.Textarea(
-            attrs={'rows': '3',
-                   'placeholder': 'Say Something...'}
-        ))
+        widget=forms.Textarea(attrs={
+            'rows': '3',
+            'placeholder': 'Say Something...'
+            }))
 
     class Meta:
         model = Comment
@@ -32,5 +30,11 @@ class CommentForm(forms.ModelForm):
 class ThreadForm(forms.Form):
     username = forms.CharField(label='', max_length=100)
 
-class MessageForm(forms.Form):
-    message = forms.CharField(label='', max_length=1000)
+class MessageForm(forms.ModelForm):
+    body = forms.CharField(label='', max_length=1000)
+
+    image = forms.ImageField(required=False)
+
+    class Meta:
+        model = MessageModel
+        fields = ['body', 'image']
